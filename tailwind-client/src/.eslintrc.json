@@ -1,0 +1,118 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "eslint-plugin-react", "react"],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+
+    /*
+           The only reason for overriding the recommended rules we pull in from
+           .eslintrc-goal.js below is to avoid a flood of lint warnings right now. We
+           should re-enable them one by one over time.
+           The .eslintrc-goal.js represents the configuration we want to end up with
+           eventually. You can run "npm run lint:goal-summary" to check how far off
+           we are from achieving this goal.
+           Furthermore, the lint-staged command that is run before commit to
+           automatically fix any fixable problems also uses the .eslintrc-goal.js
+           file directly, allowing us to ignore formatting errors while working, but
+           have the files we touch be formatted with the full rule-set before commit.
+           At the time we enabled typescript-eslint on the whole code base, the
+           following general approach was taken to reduce the number of lint errors
+           and warnings to a manageable level.
+            * If a rule causes more than 100 errors or warnings turn it off.
+            * If a rule causes more than 10 errors or warnings that can't
+              automatically be fixed, turn it off.
+            * If a rule causes more than 0 errors, make it a warning instead.
+            However, the our evaluation of the usefulness of the rule may override
+            this approach.
+         */
+
+    /*
+      Turned off for now. We may consider turning some of these on again when
+      we've dealt with all of the other lint issues in the code base.
+    */
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/indent": ["warn", 2],
+    "@typescript-eslint/no-array-constructor": "warn",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "@typescript-eslint/no-explicit-any": "warn",
+
+    /*
+      Degrade to warning.
+      Note, "ban-types" is really an aggregate rule, containing some rules that
+      can be auto-fixed and some that cannot.
+    */
+    "@typescript-eslint/no-extra-semi": "warn",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-this-alias": "warn",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "no-async-promise-executor": "warn",
+    "no-case-declarations": "off",
+    "no-irregular-whitespace": "off",
+    "no-prototype-builtins": "off",
+    "no-unsafe-finally": "warn",
+    "no-useless-escape": "warn",
+    "no-var": "warn",
+    "prefer-const": "warn",
+    "prefer-spread": "warn",
+
+    /*
+      Degrade to error.
+    */
+    "quotes": ["error", "single"],
+    "react/no-unescaped-entities": "warn"
+  },
+  "settings": {
+    "linkComponents": [
+      // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+      "Hyperlink",
+      {
+        "linkAttribute": "to",
+        "name": "Link"
+      }
+    ],
+    "propWrapperFunctions": [
+      // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
+      "forbidExtraProps",
+      {
+        "object": "Object",
+        "property": "freeze"
+      },
+      {
+        "property": "myFavoriteWrapper"
+      }
+    ],
+    "react": {
+      "createClass": "createReactClass",
+      // React version. "detect" automatically picks the version you have installed.
+      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+      // default to latest and warns if missing
+      // It will default to "detect" in the future
+      "flowVersion": "0.53", // Flow version
+      // Regex for Component Factory to use,
+      // default to "createReactClass"
+      "pragma": "React",
+      // Pragma to use, default to "React"
+      "version": "detect"
+    }
+  }
+}
