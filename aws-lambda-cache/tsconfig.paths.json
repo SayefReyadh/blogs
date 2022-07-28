@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"outDir": ".build",
+		"paths": {
+			"@aws-lambda-cache/*": ["aws-lambda-cache/*"]
+		}
+	},
+	"include": ["aws-lambda-cache/**/*.ts"],
+	"exclude": ["**/node_modules", "certificate", "node_modules"]
+}
