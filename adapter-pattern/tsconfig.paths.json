@@ -3,7 +3,7 @@
 		"baseUrl": ".",
 		"outDir": ".build",
 		"paths": {
-			"@aws-lambda-cache/*": ["aws-lambda-cache/*"]
+			"@adapter-pattern/*": ["adapter-pattern/*"]
 		}
 	},
 	"include": ["aws-lambda-cache/**/*.ts"],

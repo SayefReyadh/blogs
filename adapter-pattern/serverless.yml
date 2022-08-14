@@ -1,0 +1,29 @@
+service: adapter
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  hello:
+    handler: src/handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+custom:
+  serverless-offline:
+    httpPort: 8080
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: linked
+    watch:
+      pattern: ["src/**/*.ts", "../common/**/*.ts"]
+      ignore: ["node_modules/**/*", "../common/node_modules/**/*"]
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
