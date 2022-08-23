@@ -1,7 +1,10 @@
-import log4js from "log4js";
+// import log4js from "log4js";
 
-const log4jsLogger = log4js.getLogger();
-log4jsLogger.level = "debug";
+// const log4jsLogger = log4js.getLogger();
+// log4jsLogger.level = "debug";
+
+import pino from "pino";
+const pinoLogger = pino({ level: "debug" });
 
 interface ILogger {
 	debug(message: string): void;
@@ -12,15 +15,15 @@ interface ILogger {
 
 export class Logger implements ILogger {
 	public debug(message: string): void {
-		log4jsLogger.debug(message);
+		pinoLogger.debug(message);
 	}
 	info(message: string): void {
-		log4jsLogger.info(message);
+		pinoLogger.info(message);
 	}
 	warn(message: string): void {
-		log4jsLogger.warn(message);
+		pinoLogger.warn(message);
 	}
 	error(message: string): void {
-		log4jsLogger.error(message);
+		pinoLogger.error(message);
 	}
 }
