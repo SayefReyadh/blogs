@@ -1,14 +1,12 @@
 import { Handler } from "aws-lambda";
-import log4js from "log4js";
 
-const log4jsLogger = log4js.getLogger();
-log4jsLogger.level = "debug";
+import { Logger } from "./logAdapter";
 
 export const hello: Handler = (event: any) => {
-	log4jsLogger.debug("Some debug messages");
-	log4jsLogger.info("Some info messages");
-	log4jsLogger.warn("Some warning messages");
-	log4jsLogger.error("Some error messages");
+	Logger.debug("Some debug messages");
+	Logger.info("Some info messages");
+	Logger.warn("Some warning messages");
+	Logger.error("Some error messages");
 
 	const response = {
 		statusCode: 200,
