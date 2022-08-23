@@ -2,11 +2,13 @@ import { Handler } from "aws-lambda";
 
 import { Logger } from "./logAdapter";
 
+const logger = new Logger();
+
 export const hello: Handler = (event: any) => {
-	Logger.debug("Some debug messages");
-	Logger.info("Some info messages");
-	Logger.warn("Some warning messages");
-	Logger.error("Some error messages");
+	logger.debug("Some debug messages");
+	logger.info("Some info messages");
+	logger.warn("Some warning messages");
+	logger.error("Some error messages");
 
 	const response = {
 		statusCode: 200,

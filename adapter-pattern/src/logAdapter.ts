@@ -1,22 +1,26 @@
-// import log4js from "log4js";
+import log4js from "log4js";
 
-// const log4jsLogger = log4js.getLogger();
-// log4jsLogger.level = "debug";
-export class Logger {
-	public static debug(message: string) {
-		// log4jsLogger.debug(message);
-		console.debug(message);
+const log4jsLogger = log4js.getLogger();
+log4jsLogger.level = "debug";
+
+interface ILogger {
+	debug(message: string): void;
+	info(message: string): void;
+	warn(message: string): void;
+	error(message: string): void;
+}
+
+export class Logger implements ILogger {
+	public debug(message: string): void {
+		log4jsLogger.debug(message);
 	}
-	public static info(message: string) {
-		// log4jsLogger.info(message);
-		console.info(message);
+	info(message: string): void {
+		log4jsLogger.info(message);
 	}
-	public static warn(message: string) {
-		// log4jsLogger.warn(message);
-		console.warn(message);
+	warn(message: string): void {
+		log4jsLogger.warn(message);
 	}
-	public static error(message: string) {
-		// log4jsLogger.error(message);
-		console.error(message);
+	error(message: string): void {
+		log4jsLogger.error(message);
 	}
 }
