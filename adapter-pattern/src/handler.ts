@@ -1,8 +1,8 @@
 import { Handler } from "aws-lambda";
 
-import { Logger } from "./logAdapter";
+import { LogAdapter } from "./logAdapter";
 
-const logger = new Logger();
+const logger = new LogAdapter();
 
 export const hello: Handler = (event: any) => {
 	logger.debug("Some debug messages");
