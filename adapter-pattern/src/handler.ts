@@ -1,23 +1,40 @@
-import { Handler } from "aws-lambda";
-
+import { MAX_FILE_SIZE_MB } from "./constants";
 import { LogAdapter } from "./logAdapter";
+import {
+	downloadAssetFromUrl,
+	getFileSize,
+	publishAsset,
+	uploadAsset,
+} from "./service";
 
 const logger = new LogAdapter();
 
-export const hello: Handler = (event: any) => {
-	logger.debug("Some debug messages");
-	logger.info("Some info messages");
-	logger.warn("Some warning messages");
-	logger.error("Some error messages");
+export const handleAssetPublishService = async (assetUrl: string) => {
+	logger.info(`Downloading asset from ${assetUrl}`);
 
-	const response = {
-		statusCode: 200,
-		body: JSON.stringify({
-			message: "Hello World",
-		}),
-	};
+	try {
+		const fileName = await downloadAssetFromUrl(assetUrl);
+		logger.info(`Asset downloaded to ${fileName}`);
 
-	return new Promise((resolve) => {
-		resolve(response);
-	});
+		const fileSize = await getFileSize(fileName);
+		logger.debug(`File size of ${fileName} is ${fileSize}`);
+
+		if (fileSize > MAX_FILE_SIZE_MB) {
+			logger.warn(`File is greater than ${MAX_FILE_SIZE_MB}MB`);
+			logger.warn("Uploading might take longer than expected");
+		}
+
+		const response = await uploadAsset(fileName);
+		logger.debug(JSON.stringify(response));
+
+		const id = response.id;
+		logger.info(`Asset uploaded to ${id}`);
+
+		const success = await publishAsset(id);
+
+		return success;
+	} catch (error) {
+		logger.error(error.message);
+		throw error;
+	}
 };
