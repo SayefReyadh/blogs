@@ -17,7 +17,8 @@ export class LogAdapter implements ILogger {
 		const stream = pretty({
 			colorize: true,
 			minimumLevel: "debug",
-			translateTime: "UTC:yyyy-mm-dd HH:MM:ss.l",
+			ignore: "pid,hostname",
+			translateTime: "UTC:yyyy-MM-dd'T'HH:mm:ss.l",
 		});
 
 		this.logger = pino({ level: "debug" }, stream);
