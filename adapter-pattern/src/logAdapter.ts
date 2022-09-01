@@ -1,11 +1,5 @@
-import log4js from "log4js";
-
-// const logger = log4js.getLogger();
-// logger.level = "debug";
-
 import pino from "pino";
 import pretty from "pino-pretty";
-// const logger = pino({ level: "debug" });
 
 interface ILogger {
 	debug(message: string): void;
@@ -18,9 +12,12 @@ export class LogAdapter implements ILogger {
 	private logger: pino.Logger;
 
 	constructor() {
+		// Making configurations for pino logger
+		// to behave like log4js logger
 		const stream = pretty({
 			colorize: true,
 			minimumLevel: "debug",
+			translateTime: "UTC:yyyy-mm-dd HH:MM:ss.l",
 		});
 
 		this.logger = pino({ level: "debug" }, stream);
