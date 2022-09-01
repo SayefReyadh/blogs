@@ -4,7 +4,8 @@ import log4js from "log4js";
 // logger.level = "debug";
 
 import pino from "pino";
-const logger = pino({ level: "debug" });
+import pretty from "pino-pretty";
+// const logger = pino({ level: "debug" });
 
 interface ILogger {
 	debug(message: string): void;
@@ -14,19 +15,30 @@ interface ILogger {
 }
 
 export class LogAdapter implements ILogger {
-	public debug(message: string): void {
-		logger.debug(message);
+	private logger: pino.Logger;
+
+	constructor() {
+		const stream = pretty({
+			colorize: true,
+			minimumLevel: "debug",
+		});
+
+		this.logger = pino({ level: "debug" }, stream);
 	}
 
-	public info(message: string): void {
-		logger.info(message);
+	debug(message: string): void {
+		this.logger.debug(message);
 	}
 
-	public warn(message: string): void {
-		logger.warn(message);
+	info(message: string): void {
+		this.logger.info(message);
 	}
 
-	public error(message: string): void {
-		logger.error(message);
+	warn(message: string): void {
+		this.logger.warn(message);
+	}
+
+	error(message: string): void {
+		this.logger.error(message);
 	}
 }

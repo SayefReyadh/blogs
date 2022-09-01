@@ -1,3 +1,4 @@
+import { Handler } from "aws-lambda";
 import { MAX_FILE_SIZE_MB } from "./constants";
 import { LogAdapter } from "./logAdapter";
 import {
@@ -37,4 +38,22 @@ export const handleAssetPublishService = async (assetUrl: string) => {
 		logger.error(error.message);
 		throw error;
 	}
+};
+
+export const hello: Handler = (event: any) => {
+	logger.debug("Some debug messages");
+	logger.info("Some info messages");
+	logger.warn("Some warning messages");
+	logger.error("Some error messages");
+
+	const response = {
+		statusCode: 200,
+		body: JSON.stringify({
+			message: "Hello World",
+		}),
+	};
+
+	return new Promise((resolve) => {
+		resolve(response);
+	});
 };
