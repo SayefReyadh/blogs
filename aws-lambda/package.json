@@ -2,6 +2,9 @@
   "name": "aws-lambda-cache",
   "description": "",
   "version": "0.1.0",
+  "scripts": {
+    "start": "sls offline start"
+  },
   "dependencies": {
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1055.0",
