@@ -1,4 +1,4 @@
-service: aws-lambda-cache
+service: blog-craftsmen
 frameworkVersion: '3'
 
 provider:
@@ -20,8 +20,8 @@ custom:
     minify: false
     sourcemap: linked
     watch:
-      pattern: ['src/**/*.ts', '../common/**/*.ts']
-      ignore: ['node_modules/**/*', '../common/node_modules/**/*']
+      pattern: ['src/**/*.ts']
+      ignore: ['node_modules/**/*']
 
 plugins:
   - serverless-esbuild
