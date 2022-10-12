@@ -1,8 +1,5 @@
-import { APIGatewayEvent, ProxyResult } from 'aws-lambda';
+import { SQSEvent } from 'aws-lambda';
 
-export const handleConsume = async (event: APIGatewayEvent): Promise<ProxyResult> => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify('Hello from Lambda!'),
-  };
+export const handleConsume = async (event: SQSEvent) => {
+  console.log('SQSConsumer: event:', event);
 };

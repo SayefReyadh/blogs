@@ -21,12 +21,20 @@ functions:
     events:
       - sqs: ${self:custom.myFifoQueueARN}
 
-Resources:
-  myFifoQueue:
-    Type: 'AWS::SQS::Queue'
-    Properties:
-      QueueName: ${self:service}-${sls:stage}-myFifoQueue.fifo
-      FifoQueue: true
+resources:
+  Resources:
+    myFifoQueue:
+      Type: 'AWS::SQS::Queue'
+      Properties:
+        QueueName: ${self:service}-${sls:stage}-myFifoQueue.fifo
+        ContentBasedDeduplication: false
+        DeduplicationScope: 'messageGroup'
+        DelaySeconds: 0
+        FifoQueue: true
+        FifoThroughputLimit: 'perMessageGroupId'
+        MessageRetentionPeriod: 86400
+        ReceiveMessageWaitTimeSeconds: 0
+        VisibilityTimeout: 30
 
 custom:
   serverless-offline:
