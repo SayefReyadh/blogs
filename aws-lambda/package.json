@@ -1,6 +1,7 @@
 {
-  "name": "aws-lambda-cache",
-  "description": "",
+  "name": "serverless-offline-sqs-example-typescript",
+  "description": "This is a sample example project written in Typescript to run AWS SQS with Serverless Offline",
+  "author": "A. Sayef Reyadh",
   "version": "0.1.0",
   "scripts": {
     "start": "sls offline start",
