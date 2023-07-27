@@ -1,0 +1,8 @@
+transfer-queue:
+  name: ${self:service}-${sls:stage}-transfer.fifo
+  arn: arn:aws:sqs:${aws:region}:${aws:accountId}:${self:custom.sqs.transfer-queue.name}
+  url: https://sqs.${aws:region}.amazonaws.com/${aws:accountId}/${self:custom.sqs.transfer-queue.name}
+
+transfer-dlq:
+  name: ${self:service}-${sls:stage}-transfer-dlq.fifo
+  arn: arn:aws:sqs:${aws:region}:${aws:accountId}:${self:custom.sqs.transfer-dlq.name}

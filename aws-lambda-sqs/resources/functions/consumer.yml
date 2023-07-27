@@ -1,0 +1,4 @@
+consumer:
+  handler: ./src/sqs/consumer.handleConsume
+  events:
+    - sqs: ${self:custom.sqs.transfer-queue.arn}

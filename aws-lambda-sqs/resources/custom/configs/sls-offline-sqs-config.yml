@@ -1,0 +1,7 @@
+autoCreate: true
+apiVersion: '2012-11-05'
+endpoint: ${env:SQS_OFFLINE_ENDPOINT, 'http://0.0.0.0:9324'}
+region: ${self:provider.region}
+accessKeyId: root
+secretAccessKey: root
+skipCacheInvalidation: false

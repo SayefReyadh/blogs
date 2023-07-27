@@ -1,0 +1,22 @@
+Resources:
+  transferFifoQueue:
+    Type: 'AWS::SQS::Queue'
+    Properties:
+      QueueName: ${self:custom.sqs.transfer-queue.name}
+      ContentBasedDeduplication: false
+      DeduplicationScope: 'messageGroup'
+      DelaySeconds: 0
+      FifoQueue: true
+      FifoThroughputLimit: 'perMessageGroupId'
+      MessageRetentionPeriod: 86400
+      ReceiveMessageWaitTimeSeconds: 0
+      VisibilityTimeout: 300
+      RedrivePolicy:
+        deadLetterTargetArn: ${self:custom.sqs.transfer-dlq.arn}
+        maxReceiveCount: 3
+
+  transferDLQ:
+    Type: 'AWS::SQS::Queue'
+    Properties:
+      QueueName: ${self:custom.sqs.transfer-dlq.name}
+      FifoQueue: true

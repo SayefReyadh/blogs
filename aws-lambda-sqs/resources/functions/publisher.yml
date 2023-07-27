@@ -1,0 +1,6 @@
+publisher:
+  handler: ./src/lambda/publisher.handlePublish
+  events:
+    - httpApi:
+        path: /api/v1/publish
+        method: post

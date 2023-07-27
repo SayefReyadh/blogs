@@ -1,0 +1,1 @@
+QUEUE_URL: ${env:QUEUE_URL, '${self:custom.sqs.transfer-queue.url}'}

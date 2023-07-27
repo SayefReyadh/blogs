@@ -1,0 +1,2 @@
+- ${file(resources/functions/publisher.yml)}
+- ${file(resources/functions/consumer.yml)}

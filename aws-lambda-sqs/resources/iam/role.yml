@@ -1,0 +1,6 @@
+role:
+  statements:
+    - Effect: Allow
+      Action:
+        - sqs:SendMessage
+      Resource: ${self:custom.sqs.transfer-queue.arn}

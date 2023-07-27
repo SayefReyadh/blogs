@@ -1,0 +1,30 @@
+service: aws-lambda-sqs
+
+frameworkVersion: '3'
+
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: ${env:REGION, 'eu-west-1'}
+
+  environment: ${file(resources/environments/index.yml)}
+  iam: ${file(resources/iam/role.yml)}
+
+functions: ${file(resources/functions/index.yml)}
+
+resources:
+  - ${file(resources/sqs/transfer.fifo.yml)}
+
+custom:
+  esbuild: ${file(resources/custom/configs/esbuild-config.yml)}
+  serverless-offline: ${file(resources/custom/configs/sls-offline-config.yml)}
+  serverless-offline-sqs: ${file(resources/custom/configs/sls-offline-sqs-config.yml)}
+
+  sqs: ${file(resources/custom/sqs/queue.yml)}
+
+plugins:
+  - serverless-esbuild
+  # Run elasticMQ server `npm run start-elastic-mq` before enabling serverless-offline-sqs.
+  - serverless-offline-sqs
+  - serverless-offline
